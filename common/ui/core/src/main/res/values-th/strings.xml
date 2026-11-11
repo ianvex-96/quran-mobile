@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="remove_button">ถอด</string>
+  <string name="cancel">ยกเลิก</string>
+  <string name="from">จาก</string>
+  <string name="to">ถึง</string>
+  <string name="loading">การโหลด&#8230;</string>
+  <string name="canceling">ยก เลิก&#8230;</string>
+  <string name="default_collection">รายการโปรด</string>
+  <plurals name="ayah_collections">
+    <item quantity="other">%d คอลเลกชัน</item>
+  </plurals>
+  <!-- names of the ayah highlight colors -->
+  <string name="highlight_color_yellow">เหลือง</string>
+  <string name="highlight_color_green">เขียว</string>
+  <string name="highlight_color_blue">น้ำเงิน</string>
+  <string name="highlight_color_purple">ม่วง</string>
+  <string name="reading_bookmark_red">แดง</string>
+</resources>
