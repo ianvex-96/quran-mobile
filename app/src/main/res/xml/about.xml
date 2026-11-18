@@ -7,6 +7,48 @@
       android:summary="@string/about_description"
       android:title="@string/app_name"/>
 
+
+  <PreferenceCategory
+      android:title="@string/about_fork_developer_title"
+      app:iconSpaceReserved="false">
+
+    <Preference
+        android:summary="@string/about_fork_developer_summary"
+        android:title="@string/about_fork_developer_name"
+        app:iconSpaceReserved="false">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:data="@string/about_fork_facebook_url"/>
+    </Preference>
+
+    <Preference
+        android:summary="@string/about_fork_facebook_url"
+        android:title="@string/about_fork_facebook"
+        app:iconSpaceReserved="false">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:data="@string/about_fork_facebook_url"/>
+    </Preference>
+
+    <Preference
+        android:summary="@string/about_fork_source_url"
+        android:title="@string/about_fork_source"
+        app:iconSpaceReserved="false">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:data="@string/about_fork_source_url"/>
+    </Preference>
+
+    <Preference
+        android:summary="@string/about_fork_upstream_summary"
+        android:title="@string/about_fork_upstream"
+        app:iconSpaceReserved="false">
+      <intent
+          android:action="android.intent.action.VIEW"
+          android:data="@string/about_fork_upstream_url"/>
+    </Preference>
+  </PreferenceCategory>
+
   <PreferenceCategory
       android:key="aboutDataSources"
       android:title="@string/about_data_sources"

@@ -35,9 +35,6 @@ import com.quran.labs.androidquran.ui.helpers.BookmarkUIConverter
 import com.quran.labs.androidquran.ui.helpers.QuranListAdapter
 import com.quran.labs.androidquran.ui.helpers.QuranListAdapter.QuranTouchListener
 import com.quran.labs.androidquran.ui.helpers.QuranRow
-import com.quran.mobile.feature.sync.BookmarksSignInCard
-import com.quran.mobile.feature.sync.QuranSyncActivity
-import com.quran.mobile.feature.sync.QuranSyncManager
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.launch
 
@@ -56,9 +53,6 @@ class BookmarksFragment : Fragment(), QuranTouchListener {
   @Inject
   lateinit var bookmarkUIConverter: BookmarkUIConverter
 
-  @Inject
-  lateinit var syncManager: QuranSyncManager
-
   override fun onAttach(context: Context) {
     super.onAttach(context)
     (context.applicationContext as QuranApplication).applicationComponent.inject(this)
@@ -71,31 +65,24 @@ class BookmarksFragment : Fragment(), QuranTouchListener {
   ): View? {
     val view = inflater.inflate(R.layout.quran_bookmarks_list, container, false)
 
-    val context = requireContext()
-    view.findViewById<ComposeView>(R.id.sync_sign_in_card).setContent {
-      QuranTheme {
-        BookmarksSignInCard(
-          syncManager = syncManager,
-          onSignIn = { startActivity(Intent(context, QuranSyncActivity::class.java)) }
-        )
-      }
-    }
+    // Sync/Firebase disabled for Qur'an Mobile fork: hide sign-in card and disable sync refresh.
+    view.findViewById<View>(R.id.sync_sign_in_card)?.visibility = View.GONE
 
     val bookmarksSwipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.bookmarks_swipe_refresh)
     this.bookmarksSwipeRefresh = bookmarksSwipeRefresh
-    bookmarksSwipeRefresh.setOnRefreshListener { onRefreshBookmarks() }
-    updatePullToRefreshEnabled(syncManager.canTriggerSync)
+    bookmarksSwipeRefresh.isEnabled = false
+    bookmarksSwipeRefresh.setOnRefreshListener { bookmarksSwipeRefresh.isRefreshing = false }
 
     val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-    recyclerView.setLayoutManager(LinearLayoutManager(context))
-    recyclerView.setItemAnimator(DefaultItemAnimator())
+    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    recyclerView.itemAnimator = DefaultItemAnimator()
     this.recyclerView = recyclerView
 
     val bookmarksAdapter =
-      QuranListAdapter(context, recyclerView, emptyArray(), true)
+      QuranListAdapter(requireContext(), recyclerView, emptyArray(), true)
     bookmarksAdapter.setQuranTouchListener(this)
     this.bookmarksAdapter = bookmarksAdapter
-    recyclerView.setAdapter(bookmarksAdapter)
+    recyclerView.adapter = bookmarksAdapter
 
     val emptyStateView = view.findViewById<ComposeView>(R.id.bookmarks_empty_state)
     emptyStateView.setContent {
@@ -112,21 +99,8 @@ class BookmarksFragment : Fragment(), QuranTouchListener {
         WindowInsetsCompat.Type.systemBars() or
             WindowInsetsCompat.Type.displayCutout()
       )
-      // top, left, right are handled by QuranActivity
-      v.setPadding(
-        0,
-        0,
-        0,
-        innerPadding.bottom
-      )
+      v.setPadding(0, 0, 0, innerPadding.bottom)
       insets
-    }
-    viewLifecycleOwner.lifecycleScope.launch {
-      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-        syncManager.canTriggerSyncFlow.collect { canTriggerSync ->
-          updatePullToRefreshEnabled(canTriggerSync)
-        }
-      }
     }
     return view
   }
@@ -150,20 +124,6 @@ class BookmarksFragment : Fragment(), QuranTouchListener {
     bookmarksAdapter = null
     emptyStateView = null
     super.onDestroyView()
-  }
-
-  private fun onRefreshBookmarks() {
-    if (syncManager.canTriggerSync) {
-      syncManager.triggerSync()
-    }
-    bookmarksSwipeRefresh?.isRefreshing = false
-  }
-
-  private fun updatePullToRefreshEnabled(isEnabled: Boolean) {
-    bookmarksSwipeRefresh?.isEnabled = isEnabled
-    if (!isEnabled) {
-      bookmarksSwipeRefresh?.isRefreshing = false
-    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

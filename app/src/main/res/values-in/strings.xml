@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Quran</string>
+  <string name="app_name">Qur'an Mobile</string>
   <string name="downloadPrompt_title">Unduh Berkas yang Diperlukan?</string>
   <string name="downloadPrompt">Quran Android memerlukan beberapa berkas tambahan agar dapat berfungsi dengan baik. Jika tidak diunduh sekarang, aplikasi mungkin tidak berjalan optimal dan membutuhkan koneksi internet saat membaca. Apakah Anda ingin mengunduh berkas tersebut sekarang?</string>
   <string name="downloadTabletPrompt">Kami baru saja menambahkan gambar dengan kualitas lebih baik untuk tablet. Apakah Anda ingin mengunduh gambar tersebut sekarang?</string>
@@ -31,7 +31,17 @@
   <string name="please_wait">Harap tunggu...</string>
 
   <!-- about -->
-  <string name="about_description">Quran Android adalah aplikasi Al-Qur\'an gratis yang dikembangkan berkat kontribusi banyak pihak. Kami berharap Anda berkenan mendoakan para kontributor yang telah menghadirkan aplikasi ini.</string>
+  <string name="about_description">Qur&#39;an Mobile adalah aplikasi Al-Qur&#39;an yang dikembangkan oleh Ilman Nafi&#39;an, berbasis proyek sumber terbuka Quran for Android (GPL-3.0). Mohon doakan para kontributor yang telah menghadirkan aplikasi ini.</string>
+
+  <!-- fork / developer -->
+  <string name="about_fork_developer_title">Pengembang Qur'an Mobile</string>
+  <string name="about_fork_developer_name">Ilman Nafi'an</string>
+  <string name="about_fork_developer_summary">Pengembang aplikasi Qur'an Mobile</string>
+  <string name="about_fork_facebook">Facebook</string>
+  <string name="about_fork_source">Kode Sumber Qur'an Mobile</string>
+  <string name="about_fork_upstream">Berbasis Quran for Android</string>
+  <string name="about_fork_upstream_summary">Proyek sumber terbuka oleh quran.com (GPL-3.0)</string>
+
   <string name="about_data_sources">Sumber Data</string>
   <string name="about_images">Gambar</string>
   <string name="about_madani_images">Gambar Al-Qur\'an didasarkan pada font dari Kompleks Percetakan Al-Qur\'an Raja Fahd</string>

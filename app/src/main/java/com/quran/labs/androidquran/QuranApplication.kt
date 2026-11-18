@@ -6,6 +6,7 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.quran.labs.androidquran.core.worker.QuranWorkerFactory
 import com.quran.labs.androidquran.di.component.application.ApplicationComponent
+import com.quran.labs.androidquran.util.BundledTranslationsBootstrapper
 import com.quran.labs.androidquran.util.QuranSettings
 import com.quran.labs.androidquran.util.RecordingLogTree
 import com.quran.labs.androidquran.util.ThemeUtil
@@ -16,6 +17,10 @@ import com.quran.mobile.feature.sync.QuranSyncManager
 import dev.zacsweers.metro.HasMemberInjections
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.createGraphFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @HasMemberInjections
@@ -26,6 +31,7 @@ open class QuranApplication : Application(), QuranApplicationComponentProvider, 
   @Inject lateinit var bookmarksWidgetSubscriber: BookmarksWidgetSubscriber
   @Inject lateinit var quranSettings: QuranSettings
   @Inject lateinit var quranSyncManager: QuranSyncManager
+  @Inject lateinit var bundledTranslationsBootstrapper: BundledTranslationsBootstrapper
 
   override fun provideQuranApplicationComponent(): QuranApplicationComponent {
     return applicationComponent
@@ -36,7 +42,11 @@ open class QuranApplication : Application(), QuranApplicationComponentProvider, 
     setupTimber()
     applicationComponent = initializeInjector()
     applicationComponent.inject(this)
-    quranSyncManager.startForegroundSync()
+    CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+      bundledTranslationsBootstrapper.ensureBundledTranslations()
+    }
+    // Sync/Firebase disabled for Qur'an Mobile fork
+    // quranSyncManager.startForegroundSync()
     initializeWorkManager()
     bookmarksWidgetSubscriber.subscribeBookmarksWidgetIfNecessary()
 

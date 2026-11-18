@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Quran</string>
+  <string name="app_name">Qur'an Mobile</string>
   <string name="downloadPrompt_title">Download Required Files?</string>
   <string name="downloadPrompt">In order for Quran Android to work properly,
         we need to download some files. If you do not do this now, the app
@@ -41,7 +41,20 @@
   <string name="please_wait">Please wait…</string>
 
   <!-- about -->
-  <string name="about_description">Quran for Android is a free Quran application. Please do not forget the contributors in your prayers.</string>
+  <string name="about_description">Qur'an Mobile is a Quran application developed by Ilman Nafi'an, based on the open source Quran for Android project (GPL-3.0). Please keep the contributors in your prayers.</string>
+
+  <!-- fork / developer -->
+  <string name="about_fork_developer_title">Qur'an Mobile Developer</string>
+  <string name="about_fork_developer_name">Ilman Nafi'an</string>
+  <string name="about_fork_developer_summary">Developer of Qur'an Mobile</string>
+  <string name="about_fork_facebook">Facebook</string>
+  <string name="about_fork_facebook_url" translatable="false">https://www.facebook.com/ianvex.id</string>
+  <string name="about_fork_source">Qur'an Mobile Source Code</string>
+  <string name="about_fork_source_url" translatable="false">https://github.com/ianvex-96/quran-mobile</string>
+  <string name="about_fork_upstream">Based on Quran for Android</string>
+  <string name="about_fork_upstream_summary">Open source project by quran.com (GPL-3.0)</string>
+  <string name="about_fork_upstream_url" translatable="false">https://github.com/quran/quran_android</string>
+
   <string name="about_data_sources">Data Sources</string>
   <string name="about_images">Images</string>
   <string name="about_madani_images">The Quran images are based on the fonts from the King Fahd Quran Printing Complex</string>
